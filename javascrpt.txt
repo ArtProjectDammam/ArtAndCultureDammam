@@ -1,0 +1,37 @@
+```javascript
+// script.js
+const imageContainer = document.getElementById('imageContainer');
+const visiblePiecesInput = document.getElementById('visiblePieces');
+const imageSourceInput = document.getElementById('imageSource');
+
+const defaultImage = 'https://images.app.goo.gl/phoeNQGHHYBdNYJi7';
+
+function createImagePieces() {
+  for (let i = 0; i < 16; i++) {
+    const imagePiece = document.createElement('div');
+    imagePiece.classList.add('image-piece');
+    imagePiece.style.backgroundImage = `url(${defaultImage})`;
+    imageContainer.appendChild(imagePiece);
+  }
+}
+
+function updateVisiblePieces() {
+  const visiblePieces = parseInt(visiblePiecesInput.value);
+  const imagePieces = document.querySelectorAll('.image-piece');
+  imagePieces.forEach((piece, index) => {
+    piece.style.display = index < visiblePieces ? 'block' : 'none';
+  });
+}
+
+function changeImage() {
+  const newImage = imageSourceInput.value;
+  const imagePieces = document.querySelectorAll('.image-piece');
+  imagePieces.forEach((piece) => {
+    piece.style.backgroundImage = `url(${newImage})`;
+  });
+}
+
+visiblePiecesInput.addEventListener('input', updateVisiblePieces);
+
+createImagePieces();
+```
